@@ -1,0 +1,71 @@
+{% extends "donate/base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="col-6 mx-auto">
+
+    <div class="text-center mt-5">
+        <img src="{% static 'donate/images/donate.jpg' %}" alt="" class="img-fluid img-responsive" style="height: 200px;">
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Enter name</label>
+          <input type="name" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+
+
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Enter Email</label>
+          <input type="email" name="email" class="form-control" id="exampleInputPassword1">
+        </div>
+        
+
+
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Enter Amount</label>
+          <input type="number" name="amount" class="form-control" id="exampleInputPassword1">
+        </div>
+
+        <div class="d-grid gap-2">
+        
+        <button type="submit" class="btn btn-success btn-block">Submit</button>
+
+      </div>
+      </form>
+
+
+
+
+</div>
+
+
+<!-- <button id="rzp-button1">Pay</button> -->
+{% if payment %}
+<div class="text-center mx-auto">
+<form action="/success" method="POST">
+<script src="https://checkout.razorpay.com/v1/checkout.js"
+
+data-key="rzp_test_Ad7QoMbMk0aVEN"
+data-amount="{{payment.amount}}"
+data-currency="INR"
+data-order_id="{{payment.id}}"
+data-buttontext="Pay with Razorpay"
+data-name="Charity Fund"
+data-description="Test transaction"
+data-image="https://example.com/your_logo.jpg"
+data-prefill.name="Gaurav Kumar"
+data-prefill.email="gaurav.kumar@example.com"
+data-prefill.contact="9999999999"
+data-theme.color="#F37254"
+></script>
+<input type="hidden" custom="Hidden Element" name="hidden">
+</form>
+
+{% endif %}
+</div>
+
+{% endblock %}
